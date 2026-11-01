@@ -1,0 +1,13 @@
+
+{{ config(materialized='view') }}
+
+SELECT
+    CUSTOMERID,
+    SEGMENT,
+    COUNTRY,
+    SUM(ORDERPROFIT) AS PROFIT
+FROM {{ ref('stg_orders') }}
+GROUP BY
+    CUSTOMERID,
+    SEGMENT,
+    COUNTRY
